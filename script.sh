@@ -3,7 +3,7 @@ function parseArguments() {
   COUNT=0
   for CURRENT_ITEM in "${@}"; do
     if [[ ${CURRENT_ITEM} == "--"* ]]; then
-      printf -v "ARG_$(formatArgument "${CURRENT_ITEM}")" "%s" ""
+      printf -v "ARG_$(formatArgument "${CURRENT_ITEM}")" "%s" "1"
     else
       if [[ $PREVIOUS_ITEM == "--"* ]]; then
         printf -v "ARG_$(formatArgument "${PREVIOUS_ITEM}")" "%s" "${CURRENT_ITEM}"
@@ -23,3 +23,6 @@ function formatArgument() {
   ARGUMENT="${ARGUMENT//-/_}" # Replace "-" with "_".
   echo "${ARGUMENT}"
 }
+
+parseArguments "${@}"
+set --
